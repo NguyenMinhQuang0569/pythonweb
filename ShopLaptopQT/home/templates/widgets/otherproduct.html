@@ -1,0 +1,34 @@
+{% load static %} 
+    <!-- Products Start -->
+    <section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+                <div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+                            {% for othItem  in otherPro %}
+								<div class="item active">                                                           	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="{% static 'media/' %}{{othItem.pro_image}}" alt="" />
+													<h2>{{othItem.pro_price}}</h2>
+													<p>{{othItem.pro_name}}</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>                             
+								</div>
+                                {% endfor %}
+							</div>
+						</div>
+					</div><!--/recommended_items-->
+				</div>	
+			</div>
+		</div>
+	</section>
+    <!-- Products End -->

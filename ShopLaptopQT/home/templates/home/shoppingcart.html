@@ -1,0 +1,92 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block content %}
+{% load mathfilters %}
+    < <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Danh sách mua hàng</h2>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    {% include "../widgets/categories.html"%}
+                </div>
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="woocommerce" id="listCart">
+                                <table cellspacing="0" class="shop_table cart" id="cartx">
+                                    <thead>
+                                        <tr>
+                                            <th sytle = "width: 5%;" class="text-center">ID</th>
+                                            <th sytle = "width: 15%;" class="text-center">Ảnh sản phẩm</th>
+                                            <th sytle = "width: 25%;" class="text-center">Tên sản phẩm</th>
+                                            <th sytle = "width: 15%;" class="text-center">Đơn giá</th>
+                                            <th sytle = "width: 10%;" class="text-center">Số lượng</th>
+                                            <th sytle = "width: 15%;" class="text-center">Thành tiền</th>
+                                            <th sytle = "width: 5%;" class="text-center">Xóa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for key,value in request.session.cart.items  %}
+                                        <tr>
+                                            <td >{{key}}</td>
+                                            <td>
+                                            <a href="single-product.html"><img style="height: 50px; width:50px; margin-left: auto; margin-right: auto;"  src="{% static 'media/' %}{{value.image}}" alt=""></a>
+                                            </td>
+
+                                            <td>
+                                                {{value.name}}
+                                            </td>
+
+                                            <td class="text-danger">
+                                                {{value.price}}<sup><u>đ</u></sup> 
+                                            </td>
+
+                                            <td>                                         
+                                                <input style="width: 60px;" onchange="updateCart({{key}})" type="text" id="quantity_{{key}}" name="quantity_{{key}}" value="{{value.num}}" >
+                                            </td>
+                                            <td class="text-danger">{{value.price|mul:value.num}}<sup><u>đ</u></sup>
+                                            </td>
+
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="deleteCart({{key}})"><i class="fa fa-trash-o"></i></a> 
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr class="end">
+                                            
+                                                <td colspan="4">
+                                                <a href="products.html" class="btn btn-button">Mua thêm</a>
+
+                                                <button class="btn btn-button add-quantity" name="all">Cập nhập</button>
+
+                                                <a href="" class="btn btn-button" onclick="return confirm('bạn có chắc chắn hủy đơn hàng này không ?')">Hủy đơn hàng</a>
+                                                </td>
+                                                <td class="text-right">
+                                                    Tổng cộng:
+                                                </td>
+                                                <td colspan="2" class="text-danger text-left">
+                                                    <strong>{{total}}<sup><u>đ</u></sup></strong>
+                                                </td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>   
+                        </div>                        
+                    </div>
+                       {#% include "../widgets/formship.html"%#}                 
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

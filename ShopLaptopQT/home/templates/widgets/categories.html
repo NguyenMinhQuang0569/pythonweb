@@ -1,0 +1,10 @@
+<div class='sidebar'>
+    <div class='sb_item'>
+    <h4>Danh mục</h4>
+    {% for itemCat in catagories %}
+    <ul class='list-unstyled menu1'>
+        <li><a href='/productcat.html/{{itemCat.cat_id}}'>{{itemCat.cat_name}}</a></li>
+    </ul>
+    {% endfor %}
+    </div>
+</div>
